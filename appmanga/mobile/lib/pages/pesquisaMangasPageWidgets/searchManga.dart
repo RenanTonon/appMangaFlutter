@@ -8,33 +8,42 @@ class MangaSearchPage extends StatefulWidget {
 }
 
 class _MangaSearchPageState extends State<MangaSearchPage> {
-  
   final TextEditingController _searchController = TextEditingController();
-
-  
   List<Map<String, dynamic>> _mangas = [];
 
-  
   Future<void> _searchMangas() async {
-    final query = _searchController.text.trim();
+    final query = _searchController.text.trim().toLowerCase();
     if (query.isEmpty) {
       return;
     }
 
-    
-    final response = await http.get(Uri.parse('http://localhost:3000/mangas?nome_like=$query'));
+    try {
+      final response = await http.get(Uri.parse('http://localhost:3000/mangas'));
 
-    if (response.statusCode == 200) {
-      setState(() {
-        // Atualizar a lista de mangas com o resultado da pesquisa
-        _mangas = List<Map<String, dynamic>>.from(json.decode(response.body));
-      });
-    } else {
-      
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Erro ao buscar mangas')),
-      );
+      if (response.statusCode == 200) {
+       
+        final List<Map<String, dynamic>> mangas = List<Map<String, dynamic>>.from(json.decode(response.body));
+        
+        setState(() {
+       
+          _mangas = mangas.where((manga) {
+            final nome = manga['nome'].toString().toLowerCase();
+            return nome.contains(query);
+          }).toList();
+        });
+      } else {
+        _showErrorMessage('Erro ao buscar mangas: Código ${response.statusCode}');
+      }
+    } catch (e) {
+      _showErrorMessage('Erro ao buscar mangas: Verifique sua conexão.');
     }
+  }
+
+
+  void _showErrorMessage(String message) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text(message)),
+    );
   }
 
   @override
@@ -47,7 +56,6 @@ class _MangaSearchPageState extends State<MangaSearchPage> {
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: <Widget>[
-           
             TextField(
               controller: _searchController,
               decoration: InputDecoration(
@@ -60,8 +68,6 @@ class _MangaSearchPageState extends State<MangaSearchPage> {
               onSubmitted: (_) => _searchMangas(),
             ),
             const SizedBox(height: 20),
-
-            
             Expanded(
               child: _mangas.isEmpty
                   ? Center(child: Text('Nenhum manga encontrado'))
@@ -69,7 +75,9 @@ class _MangaSearchPageState extends State<MangaSearchPage> {
                       itemCount: _mangas.length,
                       itemBuilder: (context, index) {
                         final manga = _mangas[index];
-                        return ListTile(
+                        return Container(
+                          margin: EdgeInsets.all(10.0),
+                          child:ListTile(
                           leading: Image.network(
                             manga['foto'],
                             width: 50,
@@ -77,7 +85,8 @@ class _MangaSearchPageState extends State<MangaSearchPage> {
                             fit: BoxFit.cover,
                           ),
                           title: Text(manga['nome']),
-                        );
+                        ),
+                        ); 
                       },
                     ),
             ),

@@ -14,7 +14,7 @@ class Pesquisamangaspage extends StatelessWidget{
       appBar:AppBar(title: const Text('MANGA QUEST'),
       centerTitle: true,
       backgroundColor: const Color(0xFF3D0205),//define a cor de fundo
-      
+      automaticallyImplyLeading: false,
          ),
          body: Align(
           alignment: Alignment.center,

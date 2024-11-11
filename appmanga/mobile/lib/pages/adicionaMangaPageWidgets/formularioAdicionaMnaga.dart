@@ -46,6 +46,7 @@ class _MangaFormPageState extends State<MangaFormPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Adicionar Manga'),
+        automaticallyImplyLeading: false,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),

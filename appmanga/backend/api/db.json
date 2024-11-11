@@ -1,39 +1,33 @@
 {
   "mangas": [
     {
-      "id": 1,
+      "id": "1",
       "nome": "Naruto",
       "foto": "https://br.web.img3.acsta.net/c_310_420/pictures/16/04/11/16/56/089875.jpg"
     },
     {
-      "id": 2,
+      "id": "2",
       "nome": "Dragon Ball",
       "foto": "https://br.web.img2.acsta.net/c_310_420/pictures/15/03/20/20/24/021239.jpg"
     },
     {
-      "id": 3,
+      "id": "3",
       "nome": "One piece",
       "foto": "https://br.web.img3.acsta.net/c_310_420/pictures/16/09/09/15/54/101079.jpg"
     },
     {
-      "id": 4,
+      "id": "4",
       "nome": "Nanatsu no Taizai",
       "foto": "https://br.web.img3.acsta.net/c_310_420/pictures/20/08/11/20/56/3761241.jpg"
     },
     {
-      "id": 5,
+      "id": "5",
       "nome": "Hunter x Hunter",
       "foto": "https://br.web.img3.acsta.net/c_310_420/pictures/19/08/23/23/43/5591829.jpg"
     },
     {
-      "id": 6,
-      "nome": "My Hero Academia",
-      "foto": "https://br.web.img3.acsta.net/c_310_420/pictures/22/01/04/21/56/3332568.jpg"
-    },
-    {
-      "id": "e259",
-      "nome": "naruto uzumaki",
-      "foto": "https://br.web.img3.acsta.net/c_310_420/pictures/210/322/21032254_20130827103345033.jpg"
+      "nome": "My Hero Academiay",
+      "id": "6"
     }
   ]
 }
